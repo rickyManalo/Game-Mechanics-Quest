@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
+using System.Linq;
 
 public class MovesManager : MonoBehaviour
 {
-    [SerializeField] List<Move> avilableMoves; //All the Avilable Moves
+    [SerializeField] List<Move> availableMovesLst; //All the Available Moves
+    [SerializeField] List<Move> possibleMoveLst; //For improving speed
     PlayerController playerController;
     ControlManager controlManager;
 
@@ -13,26 +16,34 @@ public class MovesManager : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
         controlManager = FindObjectOfType<ControlManager>();
 
-        avilableMoves.Sort(Compare); //Sort all the moves based on thier prioraty
+        availableMovesLst.Sort(Compare); //Sort all the moves based on their priority
     }
 
-    public bool CanMove(List<KeyCode> keycodes) //return true if the list contain a move
+    public bool HasMove(List<KeyCode> pInputString) //return true if the list contain a move
     {
-        foreach (Move move in avilableMoves)
+        foreach (Move move in availableMovesLst)
         {
-            if (move.isMoveAvilable(keycodes))
+            if (move.isInputStringEqualTo(pInputString))
                 return true;
         }
         return false;
     }
 
-    public void PlayMove(List<KeyCode> keycodes) //Send the moves to the player starting from the highest priorty
+    //This basically is like the auto suggest on search engines
+    //this would find and throw the closest move based on the queued input
+    public Move FindMoveWithInputLike(List<KeyCode> pInputString){
+        
+        possibleMoveLst = availableMovesLst.Where(m => m.isInputStringLike(pInputString)).ToList();
+        return null;
+    }
+
+    public void ExecMove(List<KeyCode> pInputString) //Send the moves to the player starting from the highest priority
     {
-        foreach (Move move in avilableMoves)
+        foreach (Move move in availableMovesLst)
         {
-            if (move.isMoveAvilable(keycodes))
+            if (move.isInputStringEqualTo(pInputString))
             {
-                playerController.PlayMove(move.GetMove(), move.GetMoveComboPriorty());
+                playerController.ExecMove(move.GetMove(), move.GetMoveComboPriority());
                 break;
             }
         }
@@ -40,6 +51,6 @@ public class MovesManager : MonoBehaviour
 
     public int Compare(Move move1, Move move2)
     {
-        return Comparer<int>.Default.Compare(move2.GetMoveComboPriorty(), move1.GetMoveComboPriorty());
+        return Comparer<int>.Default.Compare(move2.GetMoveComboPriority(), move1.GetMoveComboPriority());
     }
 }

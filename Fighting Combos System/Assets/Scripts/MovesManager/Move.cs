@@ -5,20 +5,23 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Move", menuName = "New Move")]
 public class Move : ScriptableObject
 {
-    [SerializeField] List<KeyCode> movesKeyCodes; //the List and order of the Moves
+    [SerializeField] string _name = "Move";
+    [SerializeField] List<KeyCode> _inputString; //the List and order of the Moves
     [SerializeField] Moves moveType; //The kind of the move
-    [SerializeField] int ComboPriorty = 0; //the more complicated the move the higher the Priorty
+    [SerializeField] int comboPriority = 0; //the more complicated the move the higher the Priorty
 
-    public bool isMoveAvilable(List<KeyCode> playerKeyCodes) //Check if we can perform this move from the entered keys
+    //TODO: move this check earlier
+
+    public bool isInputStringEqualTo(List<KeyCode> pInputString) //Check if we can perform this move from the entered keys
     {
         int comboIndex = 0;
 
-        for (int i = 0; i < playerKeyCodes.Count; i++)
+        for (int i = 0; i < pInputString.Count; i++)
         {
-            if (playerKeyCodes[i] == movesKeyCodes[comboIndex])
+            if (pInputString[i] == _inputString[comboIndex])
             {
                 comboIndex++;
-                if (comboIndex == movesKeyCodes.Count) //The end of the Combo List
+                if (comboIndex == _inputString.Count) //The end of the Combo List
                     return true;
             }
             else
@@ -27,14 +30,26 @@ public class Move : ScriptableObject
         return false;
     }
 
+    public bool isInputStringLike(List<KeyCode> pInputString) //Check if we can perform this move from the entered keys
+    {
+        for (int i = 0; i < pInputString.Count; i++)
+        {
+            if (pInputString[i] != _inputString[i])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     //Getters
     public int GetMoveComboCount()
     {
-        return movesKeyCodes.Count;
+        return _inputString.Count;
     }
-    public int GetMoveComboPriorty()
+    public int GetMoveComboPriority()
     {
-        return ComboPriorty;
+        return comboPriority;
     }
     public Moves GetMove()
     {

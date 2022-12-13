@@ -1,4 +1,4 @@
-﻿public enum Moves //All the Avilable Moves
+﻿public enum Moves //All the Available Moves
 {
     None,
     Punch,

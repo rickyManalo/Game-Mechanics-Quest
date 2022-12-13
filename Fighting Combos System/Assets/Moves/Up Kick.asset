@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ce935e094db324e92015c2bdfd5449, type: 3}
   m_Name: Up Kick
   m_EditorClassIdentifier: 
-  movesKeyCodes: 1101000073000000
+  inputString: 1101000073000000
   moveType: 5
   ComboPriorty: 1

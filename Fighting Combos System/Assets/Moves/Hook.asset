@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ce935e094db324e92015c2bdfd5449, type: 3}
   m_Name: Hook
   m_EditorClassIdentifier: 
-  movesKeyCodes: 130100001301000064000000
+  _inputString: 
   moveType: 9
   ComboPriorty: 3

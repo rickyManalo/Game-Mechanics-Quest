@@ -21,8 +21,9 @@ public class PlayerController : MonoBehaviour
             controlManager = FindObjectOfType<ControlManager>();
     }
 
-    public void PlayMove(Moves move, int ComboPriorty) //Get the Move and the Priorty
+    public void ExecMove(Moves move, int ComboPriorty) //Get the Move and the Priorty
     {
+        Debug.Log("Exec Move");
         if (Moves.None != move) //if the move is none ignore the function
         {
             if (ComboPriorty >= CurrentComboPriorty) //if the new move is higher Priorty play it and ignore everything else
