@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ce935e094db324e92015c2bdfd5449, type: 3}
   m_Name: Upper Cut
   m_EditorClassIdentifier: 
-  _inputString: 
+  _name: Upper Cut
+  _inputString: 130100001101000073000000
   moveType: 3
-  ComboPriorty: 2
+  comboPriority: 3

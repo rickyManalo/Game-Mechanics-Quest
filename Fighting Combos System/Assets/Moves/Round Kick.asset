@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ce935e094db324e92015c2bdfd5449, type: 3}
   m_Name: Round Kick
   m_EditorClassIdentifier: 
-  inputString: 130100001201000073000000
+  _name: RoundKick
+  _inputString: 64000000
   moveType: 6
-  ComboPriorty: 3
+  comboPriority: 1

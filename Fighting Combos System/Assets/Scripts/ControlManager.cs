@@ -32,22 +32,23 @@ public class ControlManager : MonoBehaviour
         //Go through all the Keys
         //To make it faster we can attach a class and put all the keys that are allowed to be pressed
         //This will make the process a bit faster rather than moving through all keys
-        foreach (KeyCode kcode in Enum.GetValues(typeof(KeyCode)))//TODO: need to change this as this is too much
-        {
-            if (Input.GetKeyDown(kcode))
-            {
-                Debug.Log("KeyPressed: "+kcode);
-                queuedKeys.Add(kcode); //Add the Key to the List
-                movesMngr.FindMoveWithInputLike(queuedKeys);
 
-                if (!movesMngr.HasMove(queuedKeys)){ //if there is no available Moves reset the list
-                    Debug.Log("Stop coroutine");
-                    StopAllCoroutines();
-                }
+        // foreach (KeyCode kcode in Enum.GetValues(typeof(KeyCode)))//TODO: need to change this as this is too much
+        // {
+        //     if (Input.GetKeyDown(kcode))
+        //     {
+        //         Debug.Log("KeyPressed: "+kcode);
+        //         queuedKeys.Add(kcode); //Add the Key to the List
+        //         movesMngr.FindMoveWithInputLike(queuedKeys);
 
-                StartCoroutine(ResetComboTimer()); //Start the Resetting process
-            }//every keypress, the resetcombotimer is essentially restarted. and the system rely on the person stop inputting to exec move
-        }
+        //         if (!movesMngr.HasMove(queuedKeys)){ //if there is no available Moves reset the list
+        //             Debug.Log("Stop coroutine");
+        //             StopAllCoroutines();
+        //         }
+
+        //         StartCoroutine(ResetComboTimer()); //Start the Resetting process
+        //     }//every keypress, the resetcombotimer is essentially restarted. and the system rely on the person stop inputting to exec move
+        // }
     }
 
     public void ResetCombo() //Called to Reset the Combo after a move

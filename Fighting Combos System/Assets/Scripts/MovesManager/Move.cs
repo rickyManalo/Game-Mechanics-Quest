@@ -7,7 +7,7 @@ public class Move : ScriptableObject
 {
     [SerializeField] string _name = "Move";
     [SerializeField] List<KeyCode> _inputString; //the List and order of the Moves
-    [SerializeField] Moves moveType; //The kind of the move
+    // [SerializeField] Moves moveType; //The kind of the move
     [SerializeField] int comboPriority = 0; //the more complicated the move the higher the Priorty
 
     //TODO: move this check earlier
@@ -51,8 +51,8 @@ public class Move : ScriptableObject
     {
         return comboPriority;
     }
-    public Moves GetMove()
-    {
-        return moveType;
-    }
+    // public Moves GetMType()
+    // {
+    //     return moveType;
+    // }
 }

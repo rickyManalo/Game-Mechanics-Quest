@@ -8,8 +8,8 @@ public class TestManager : MonoBehaviour
 {
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-            ResetScene();
+        // if (Input.GetKeyDown(KeyCode.R))
+        //     ResetScene();
     }
 
     void ResetScene()

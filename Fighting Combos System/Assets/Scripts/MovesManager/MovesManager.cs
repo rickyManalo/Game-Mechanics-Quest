@@ -39,14 +39,17 @@ public class MovesManager : MonoBehaviour
 
     public void ExecMove(List<KeyCode> pInputString) //Send the moves to the player starting from the highest priority
     {
-        foreach (Move move in availableMovesLst)
-        {
-            if (move.isInputStringEqualTo(pInputString))
-            {
-                playerController.ExecMove(move.GetMove(), move.GetMoveComboPriority());
-                break;
-            }
-        }
+        // foreach (Move move in availableMovesLst)
+        // {
+        //     if (move.isInputStringEqualTo(pInputString))
+        //     {
+        //         playerController.ExecMove(move.GetMType(), move.GetMoveComboPriority());
+        //         break;
+        //     }
+        // }
+
+        Move m = possibleMoveLst[0];
+        playerController.ExecMove(m);
     }
 
     public int Compare(Move move1, Move move2)

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -47,7 +48,6 @@ public class PlayerController : MonoBehaviour
                 case Moves.UpKick:
                     animator.SetTrigger("UpKick");
                     break;
-
                 case Moves.UpPunch:
                     animator.SetTrigger("UpPunch");
                     break;
@@ -69,6 +69,18 @@ public class PlayerController : MonoBehaviour
             }
 
             CurrentComboPriorty = 0; //Reset the Combo Priorty
+        }
+    }
+
+    public void ExecMove(Move m){
+        Debug.Log("Exec Move2");
+        animator.SetTrigger(m.name);
+    }
+
+    public void OnInputs(InputAction.CallbackContext value){
+        if(value.started){
+            // isSprinting = true;
+            Debug.Log("inputCntrl: "+value.control);
         }
     }
 

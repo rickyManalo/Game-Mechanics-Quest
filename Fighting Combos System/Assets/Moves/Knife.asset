@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ce935e094db324e92015c2bdfd5449, type: 3}
   m_Name: Knife
   m_EditorClassIdentifier: 
-  _inputString: 
+  _name: Knife
+  _inputString: 1401000073000000
   moveType: 8
-  ComboPriorty: 3
+  comboPriority: 2
