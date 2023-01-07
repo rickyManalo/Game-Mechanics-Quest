@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
     public void OnInputs(InputAction.CallbackContext value){
         if(value.started){
             // isSprinting = true;
-            Debug.Log("inputCntrl: "+value.control);
+            // Debug.Log("inputCntrl: "+value.control);
         }
     }
 

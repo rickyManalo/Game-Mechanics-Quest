@@ -34,20 +34,13 @@ public class MovesManager : MonoBehaviour
     public Move FindMoveWithInputLike(List<KeyCode> pInputString){
         
         possibleMoveLst = availableMovesLst.Where(m => m.isInputStringLike(pInputString)).ToList();
+        possibleMoveLst = possibleMoveLst.OrderBy(m => m.GetInputString().Count).ToList();
         return null;
     }
 
     public void ExecMove(List<KeyCode> pInputString) //Send the moves to the player starting from the highest priority
     {
-        // foreach (Move move in availableMovesLst)
-        // {
-        //     if (move.isInputStringEqualTo(pInputString))
-        //     {
-        //         playerController.ExecMove(move.GetMType(), move.GetMoveComboPriority());
-        //         break;
-        //     }
-        // }
-
+        
         Move m = possibleMoveLst[0];
         playerController.ExecMove(m);
     }

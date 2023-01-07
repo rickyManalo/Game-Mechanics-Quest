@@ -2,26 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//TODO: As much as I want to have multiply key input part, it's too much work for now 
+// considering the rnd I still need for the current thing I want to make work
 [CreateAssetMenu(fileName = "New Move", menuName = "New Move")]
 public class Move : ScriptableObject
 {
     [SerializeField] string _name = "Move";
-    [SerializeField] List<KeyCode> _inputString; //the List and order of the Moves
-    // [SerializeField] Moves moveType; //The kind of the move
+    [SerializeField] List<KeyCode> inputString; //the List and order of the Moves
     [SerializeField] int comboPriority = 0; //the more complicated the move the higher the Priorty
 
-    //TODO: move this check earlier
+    //TODO: keycode to inputControl name conversion, maybe prepare the converted inputString onStart
 
     public bool isInputStringEqualTo(List<KeyCode> pInputString) //Check if we can perform this move from the entered keys
     {
         int comboIndex = 0;
 
+        if(inputString.Count == 0){
+            return false;//just for debugging so for empty input moves
+        }
+
         for (int i = 0; i < pInputString.Count; i++)
         {
-            if (pInputString[i] == _inputString[comboIndex])
+            if (pInputString[i] == inputString[comboIndex])
             {
                 comboIndex++;
-                if (comboIndex == _inputString.Count) //The end of the Combo List
+                if (comboIndex == inputString.Count) //The end of the Combo List
                     return true;
             }
             else
@@ -32,9 +37,13 @@ public class Move : ScriptableObject
 
     public bool isInputStringLike(List<KeyCode> pInputString) //Check if we can perform this move from the entered keys
     {
+        if(inputString.Count == 0){
+            return false;//just for debugging so for empty input moves
+        }
+
         for (int i = 0; i < pInputString.Count; i++)
         {
-            if (pInputString[i] != _inputString[i])
+            if (pInputString[i] != inputString[i])
             {
                 return false;
             }
@@ -45,14 +54,14 @@ public class Move : ScriptableObject
     //Getters
     public int GetMoveComboCount()
     {
-        return _inputString.Count;
+        return inputString.Count;
     }
     public int GetMoveComboPriority()
     {
         return comboPriority;
     }
-    // public Moves GetMType()
-    // {
-    //     return moveType;
-    // }
+
+    public List<KeyCode> GetInputString(){
+        return inputString;
+    }
 }

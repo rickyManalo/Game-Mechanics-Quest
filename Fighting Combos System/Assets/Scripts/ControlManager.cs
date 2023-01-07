@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class ControlManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class ControlManager : MonoBehaviour
     [SerializeField] List<KeyCode> queuedKeys; //List of all the Keys Pressed so far
 
     [SerializeField] Text txtControlsTest; //Just for testing for printing the keys
+    InputControlToKeyCodeConverter conv = new InputControlToKeyCodeConverter();
 
     MovesManager movesMngr;
     void Awake()
@@ -22,33 +24,23 @@ public class ControlManager : MonoBehaviour
 
     void Update()
     {
-        DetectPressedKey(); //Get the Pressed Key
-
         PrintControls(); //Just for testing
     }
 
-    public void DetectPressedKey()
-    {
-        //Go through all the Keys
-        //To make it faster we can attach a class and put all the keys that are allowed to be pressed
-        //This will make the process a bit faster rather than moving through all keys
+    public void OnSkillKeyInput(InputAction.CallbackContext value){
+        if(value.started){
+            Debug.Log("inputCntrl: "+value.control.ToString());//actual keyboard key
+            Debug.Log("inputCntrl: "+value.action);//binding name & keyboard key    
+            queuedKeys.Add(conv.Convert(value.control));
+            movesMngr.FindMoveWithInputLike(queuedKeys);//very important as this is the one that finds the move to be executed
+            
+            if (!movesMngr.HasMove(queuedKeys)){ //if there is no available Moves reset the list
+                // Debug.Log("Stop coroutine");
+                StopAllCoroutines();
+            }
 
-        // foreach (KeyCode kcode in Enum.GetValues(typeof(KeyCode)))//TODO: need to change this as this is too much
-        // {
-        //     if (Input.GetKeyDown(kcode))
-        //     {
-        //         Debug.Log("KeyPressed: "+kcode);
-        //         queuedKeys.Add(kcode); //Add the Key to the List
-        //         movesMngr.FindMoveWithInputLike(queuedKeys);
-
-        //         if (!movesMngr.HasMove(queuedKeys)){ //if there is no available Moves reset the list
-        //             Debug.Log("Stop coroutine");
-        //             StopAllCoroutines();
-        //         }
-
-        //         StartCoroutine(ResetComboTimer()); //Start the Resetting process
-        //     }//every keypress, the resetcombotimer is essentially restarted. and the system rely on the person stop inputting to exec move
-        // }
+            StartCoroutine(ResetComboTimer()); //Start the Resetting process
+        }
     }
 
     public void ResetCombo() //Called to Reset the Combo after a move
