@@ -23,9 +23,9 @@ public class MovesManager : MonoBehaviour
     {
         foreach (Move move in availableMovesLst)
         {
-            if (move.isInputStringEqualTo(pInputString))
-                return true;
+            return move.isInputStringLike(pInputString);
         }
+
         return false;
     }
 
@@ -38,9 +38,8 @@ public class MovesManager : MonoBehaviour
         return null;
     }
 
-    public void ExecMove(List<KeyCode> pInputString) //Send the moves to the player starting from the highest priority
+    public void ExecMove(List<KeyCode> pInputString)
     {
-        
         Move m = possibleMoveLst[0];
         playerController.ExecMove(m);
     }

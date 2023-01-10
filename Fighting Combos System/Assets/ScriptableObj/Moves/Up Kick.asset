@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ce935e094db324e92015c2bdfd5449, type: 3}
   m_Name: Up Kick
   m_EditorClassIdentifier: 
-  _name: UpKick
-  _inputString: 110100001101000064000000
+  triggerName: UpKick
+  inputString: 6500000031000000
   comboPriority: 2

@@ -35,7 +35,7 @@ public class ControlManager : MonoBehaviour
             movesMngr.FindMoveWithInputLike(queuedKeys);//very important as this is the one that finds the move to be executed
             
             if (!movesMngr.HasMove(queuedKeys)){ //if there is no available Moves reset the list
-                // Debug.Log("Stop coroutine");
+                Debug.Log("Stop coroutine");
                 StopAllCoroutines();
             }
 

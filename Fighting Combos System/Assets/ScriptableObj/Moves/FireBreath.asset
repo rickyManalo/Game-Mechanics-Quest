@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ce935e094db324e92015c2bdfd5449, type: 3}
   m_Name: FireBreath
   m_EditorClassIdentifier: 
-  _name: FireBreath
-  _inputString: 1101000012010000730000007300000064000000
+  triggerName: FireBreath
+  inputString: 32000000
   comboPriority: 5

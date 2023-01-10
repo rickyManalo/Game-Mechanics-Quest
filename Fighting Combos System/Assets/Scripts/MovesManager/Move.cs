@@ -7,13 +7,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Move", menuName = "New Move")]
 public class Move : ScriptableObject
 {
-    [SerializeField] string _name = "Move";
+    [SerializeField] string triggerName = "Move";
     [SerializeField] List<KeyCode> inputString; //the List and order of the Moves
     [SerializeField] int comboPriority = 0; //the more complicated the move the higher the Priorty
 
     //TODO: keycode to inputControl name conversion, maybe prepare the converted inputString onStart
 
-    public bool isInputStringEqualTo(List<KeyCode> pInputString) //Check if we can perform this move from the entered keys
+    public bool isInputStringEqualTo(List<KeyCode> userInpString) //Check if we can perform this move from the entered keys
     {
         int comboIndex = 0;
 
@@ -21,9 +21,9 @@ public class Move : ScriptableObject
             return false;//just for debugging so for empty input moves
         }
 
-        for (int i = 0; i < pInputString.Count; i++)
+        for (int i = 0; i < userInpString.Count; i++)
         {
-            if (pInputString[i] == inputString[comboIndex])
+            if (userInpString[i] == inputString[comboIndex])
             {
                 comboIndex++;
                 if (comboIndex == inputString.Count) //The end of the Combo List
@@ -35,19 +35,28 @@ public class Move : ScriptableObject
         return false;
     }
 
-    public bool isInputStringLike(List<KeyCode> pInputString) //Check if we can perform this move from the entered keys
+    public bool isInputStringLike(List<KeyCode> userInpString) //Check if we can perform this move from the entered keys
     {
         if(inputString.Count == 0){
             return false;//just for debugging so for empty input moves
         }
 
-        for (int i = 0; i < pInputString.Count; i++)
+        if(inputString.Count < userInpString.Count){
+            return false;//might the stupid weird index out of bounds error
+        }
+
+        Debug.Log("userInp: "+userInpString.Count+" inp: "+inputString.Count);
+
+        for (int i = 0; i < userInpString.Count; i++)
         {
-            if (pInputString[i] != inputString[i])
+            Debug.Log("index: "+i+" mName: "+triggerName);
+            if (userInpString[i] != inputString[i])
             {
                 return false;
             }
         }
+
+        Debug.Log("-X-X-");
         return true;
     }
 
@@ -63,5 +72,9 @@ public class Move : ScriptableObject
 
     public List<KeyCode> GetInputString(){
         return inputString;
+    }
+
+    public string GetTriggerName(){
+        return triggerName;
     }
 }

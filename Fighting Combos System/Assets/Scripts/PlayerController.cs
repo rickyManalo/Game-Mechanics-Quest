@@ -74,15 +74,15 @@ public class PlayerController : MonoBehaviour
 
     public void ExecMove(Move m){
         Debug.Log("Exec Move2");
-        animator.SetTrigger(m.name);
+        animator.SetTrigger(m.GetTriggerName());
     }
 
-    public void OnInputs(InputAction.CallbackContext value){
-        if(value.started){
-            // isSprinting = true;
-            // Debug.Log("inputCntrl: "+value.control);
-        }
-    }
+    // public void OnInputs(InputAction.CallbackContext value){
+    //     if(value.started){
+    //         // isSprinting = true;
+    //         // Debug.Log("inputCntrl: "+value.control);
+    //     }
+    // }
 
     void ResetTriggers() //Reset All the Animation Triggers so we don't have overlapping animations
     {
