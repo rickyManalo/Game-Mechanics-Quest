@@ -65,10 +65,6 @@ public class Move : ScriptableObject
     {
         return inputString.Count;
     }
-    public int GetMoveComboPriority()
-    {
-        return comboPriority;
-    }
 
     public List<KeyCode> GetInputString(){
         return inputString;

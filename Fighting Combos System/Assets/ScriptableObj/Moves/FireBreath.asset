@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: FireBreath
   m_EditorClassIdentifier: 
   triggerName: FireBreath
-  inputString: 32000000
+  inputString: 320000003200000031000000
   comboPriority: 5

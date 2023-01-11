@@ -34,12 +34,13 @@ public class ControlManager : MonoBehaviour
             queuedKeys.Add(conv.Convert(value.control));
             movesMngr.FindMoveWithInputLike(queuedKeys);//very important as this is the one that finds the move to be executed
             
-            if (!movesMngr.HasMove(queuedKeys)){ //if there is no available Moves reset the list
+            if (!movesMngr.HasMove(queuedKeys)){ //if there is no available Moves, stop the reset/execute move process
                 Debug.Log("Stop coroutine");
                 StopAllCoroutines();
+                //TODO: support moves with the same starting input/keycode
             }
 
-            StartCoroutine(ResetComboTimer()); //Start the Resetting process
+            StartCoroutine(ResetComboTimer()); //Start the Resetting process which also executes the moves
         }
     }
 
@@ -50,8 +51,6 @@ public class ControlManager : MonoBehaviour
     }
 
     //TODO: need to rewrite combo reset timer as current one gives lag to single key moves
-    //TODO: make animator not rely on move name but on the key input
-    //TODO: support new inputsystem
     IEnumerator ResetComboTimer()
     {
         yield return new WaitForSeconds(inputSpdLeniency);
